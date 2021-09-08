@@ -2,7 +2,7 @@
   "name": "loghi",
   "productName": "loghi",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Loghi - Skydive logbook",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
