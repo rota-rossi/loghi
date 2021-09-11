@@ -13,10 +13,9 @@
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "*": ["node_modules/*"]
+      "app/*": ["src/renderer/app/*"],
+      "src/*": ["src/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }
