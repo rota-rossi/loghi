@@ -6,6 +6,7 @@ import installExtension, {
   REDUX_DEVTOOLS,
   REACT_DEVELOPER_TOOLS,
 } from 'electron-devtools-installer';
+import { sequelize } from './sequelize';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -43,6 +44,14 @@ const createWindow = (): void => {
     .then((name) => console.log(`Added Extension:  ${name}`))
     .catch((err) => console.log('An error occurred: ', err));
 
+  sequelize
+    .authenticate()
+    .then(() => {
+      console.log('connected successfully');
+    })
+    .catch((error) => {
+      console.log('error conencting', error);
+    });
   startUSBMonitoring(sendConnectionNotification);
 };
 
