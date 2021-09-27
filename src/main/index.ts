@@ -2,6 +2,10 @@ import { store } from '../common/store';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { startUSBMonitoring, stopUSBMonitoring } from './usbDetection';
 import { Device } from 'usb-detection';
+import installExtension, {
+  REDUX_DEVTOOLS,
+  REACT_DEVELOPER_TOOLS,
+} from 'electron-devtools-installer';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -35,6 +39,10 @@ const createWindow = (): void => {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
+  installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
+
   startUSBMonitoring(sendConnectionNotification);
 };
 
