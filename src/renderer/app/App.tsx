@@ -1,7 +1,8 @@
 const { ipcRenderer } = window.require('electron');
 import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Device } from 'usb-detection';
 import { Sidebar } from './organisms';
 import { Home, Equipment, Aircraft, Import, Settings } from './templates';
 
@@ -12,19 +13,24 @@ export const App: FC = () => {
     ipcRenderer.invoke('getLanguage').then((value) => {
       i18n.changeLanguage(value);
     });
+    ipcRenderer.on('deviceConnected', (_, device: Device) => {
+      console.log({ device });
+    });
   }, []);
 
   const language = ipcRenderer.invoke('getLanguage');
   return (
-    <div className="w-screen h-screen bg-gray-200 flex">
-      <Sidebar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/import" component={Import} />
-        <Route path="/equipment" component={Equipment} />
-        <Route path="/aircraft" component={Aircraft} />
-        <Route path="/settings" component={Settings} />
-      </Switch>
-    </div>
+    <HashRouter>
+      <div className="w-screen h-screen bg-gray-200 flex">
+        <Sidebar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/import" component={Import} />
+          <Route path="/equipment" component={Equipment} />
+          <Route path="/aircraft" component={Aircraft} />
+          <Route path="/settings" component={Settings} />
+        </Switch>
+      </div>
+    </HashRouter>
   );
 };
