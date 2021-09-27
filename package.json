@@ -109,7 +109,7 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "sequelize": "^6.6.5",
-    "sqlite3": "^5.0.2",
+    "sqlite3": "mapbox/node-sqlite3#593c9d498be2510d286349134537e3bf89401c4a",
     "usb-detection": "^4.10.0"
   },
   "jest": {
